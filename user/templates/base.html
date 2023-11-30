@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block 'title' %} Base {% endblock %}</title>
+    <link rel="stylesheet" {% block 'style' %} href="{% static 'user/base.css' %}" {% endblock %} />
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
+
+<body>
+    <main>
+        {% block 'body' %}
+        <h1>Final Project</h1>
+        {% endblock %}
+    </main>
+    <fotter>
+        {% block 'footer' %}
+        <div class="text-center p-5 mt-5" style="background-color:rgb(211, 242, 34); height:auto" >
+            <p>Copyright© {% now 'Y' %}</p>
+        </div>
+        {% endblock %}
+    </fotter>
+</body>
+</html>

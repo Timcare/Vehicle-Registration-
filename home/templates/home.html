@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block 'title' %} Home Page {% endblock %}
+{% block 'style' %} href="{% static 'user/home.css' %}" {% endblock %}
+
+{% block 'body' %}
+<main>
+    <div id="nav">
+        <div class="lead_nav">
+            <h1>Final Year Projects</h1>
+        </div>
+        <div class="trail_nav">
+            <a href="">Dashboard</a>
+            <a href="">Profile</a>
+            <a href="{% url 'password_change' %}">Change Password</a>
+            <a href="{% url 'logout' %}">Logout</a>
+            
+        </div>
+    </div>
+    
+    <div class="section1">
+        <div id≡"homew">
+            <h1>Online Vehicle Registration</h1>
+            <p>Welcome to .... ,we provide online vehicle registration service for easy vehicle
+                registration service
+            </p>
+            <a href={% url 'register' %}> Get Started</a>
+        </div>
+        <div id="homeimg">
+            <img src="{% static 'images/car.jpg' %}" width='500px'>
+        </div>
+    </div>
+    
+</main>
+{% endblock %}
