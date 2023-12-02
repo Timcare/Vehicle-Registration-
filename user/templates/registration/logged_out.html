@@ -4,10 +4,10 @@
 {% block 'title' %} Login Page {% endblock %}
 
 {% block 'body' %}
-<h1> Logged out</h1>
+<h1 class="m-5"> Logged out</h1>
 
-<p>
-    You have been successfully logged out
-    You can <a href="{% url 'login' %} ">Login Here</a>
+<p class="m-5">
+    You have been successfully logged out<br>
+    You can <a class="text-decoration-none"href="{% url 'login' %} ">Login Here</a>
 </p>
 {% endblock %}
