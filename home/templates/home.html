@@ -19,20 +19,18 @@
         </div>
     </div>
      {% endcomment %}
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-5 mb-5 col-sm-12 ps-5">
-                <h1>Online Vehicle Registration</h1>
-            <p>Welcome to .... ,we provide online vehicle registration service for easy vehicle
-                registration service
-            </p>
-                <button class="btn btn-large btn-primary"><a class="text-white text-decoration-none"href=''> Get Started</a></button>
-            
-            </div>
-            <div class="col-lg-7 col-sm-12 d-flex justify-content-lg-end pe-5">
-                <img class="img-fluid rounded=5" style="border-radius: 35px 20px 35px 020px" src="{% static 'images/car.jpg' %}" width='500px'>
+    <section class="text-center bg-white text-dark p-5 text-sm-start">
+        <div class="container">
+            <div class="d-sm-flex">
+                <div>
+                    <h1>Online Vehicle <span class="text-success">Registration</span></h1>
+                    <p class="lead my-4">we provide online vehicle registration service for easy vehicle
+                        registration service
+                    </p>
+                    <button class="btn btn-lg btn-primary mb-3">Get Started</button>
+                </div>
+                <img class="img-fluid w-50 d-none d-sm-block" style="border-radius: 35px 20px 35px 020px" src="{% static 'images/car.jpg' %}" />
             </div>
         </div>
-    </div>
-
+    </section>
 {% endblock %}
