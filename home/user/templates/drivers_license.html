@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block 'title' %} Dashboard {% endblock %}
+
+{% block 'body' %} 
+<div {% if messages.tag %} class="alert-{{messages.tag}}" {% endif %}>
+    {% if messages %}
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    {% endif %}
+
+</div>
+
+<div class="w-100 p-4">
+    <p class="fw-bold lead">DRIVER'S LICENSE</p>
+    {% for profile in profiles %}
+    <div class="text-center">
+        <img class="rounded img-thumbnail" src="{{ profile.profiles.photo.url}}" width="200px" height="100px"></img>
+    </div>
+    {% endfor %}
+    <table class="table">
+        
+        <tbody>
+            {% for profile in profiles %}
+            <tr>
+                <th scope="row">Full Name</th>
+                <td>{{profile.firstname}} {% if profile.middlename == None%} {% else %}{{profile.middlename}} {% endif %}{{profile.lastname}}</td>
+            </tr>
+            <tr>
+                <th scope="row">State of Origin</th>
+                <td>{{profile.state}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Local Government Area</th>
+                <td>{{profile.local_government}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Issue Date</th>
+                <td>{{profile.issue_date}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Expiry Date</th>
+                <td>{{profile.expiry_date}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Date of Birth</th>
+                <td>{{profile.date_of_birth}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Blood Group</th>
+                <td>{{profile.blood_group}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Vehicle Category</th>
+                <td>{{profile.class_of_vehicle}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
+</div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block 'title' %} Dashboard {% endblock %}
+
+{% block 'body' %}
+{% comment %} <div {% if messages.tag %} class="alert-{{messages.tag}}" {% endif %}>
+    {% if messages %}
+    {% for message in messages %}
+    {{message}}
+    {% endfor %}
+    {% endif %}
+
+</div> {% endcomment %}
+<div class="text-center fw-bold">
+    <p> Please fill the following form:</p>
+</div>
+
+<div class="w-100 p-4">
+    <p class="fw-bold lead">VEHICLE INFORMATION</p>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col">
+                {{vehicleform|crispy}}
+            </div>
+            <div class="col" >
+                {{vehicleinfo|crispy}}
+            </div>
+            <p class="fw-bold lead">OWNER INFORMATION</p>
+            <div class="row">
+                <div class="col">
+                    {{ownerinfo|crispy}}
+                    <div id="individual">
+                    {{individualform|crispy}}
+                    </div>
+                    <div id="company">
+                    {{companyform|crispy}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-large p-3 mx-auto" type="submit" style="background-color:rgb(211, 242, 34)">Preview</button>
+    </form>
+</div>
+<script>
+    document.getElementById('individual').style.display='none';
+    document.getElementById('company').style.display='block';
+    var dropdown=document.getElementById('id_owner_identification')
+    dropdown.addEventListener('change',function(){
+        var selectedValue = dropdown.value
+        if(selectedValue==='Company RC Number') {
+            console.log("Hello")
+            document.getElementById('individual').style.display='none';
+            document.getElementById('company').style.display='block';
+            document.getElementById('id_local_government').removeAttribute('required');
+            document.getElementById('id_state').removeAttribute('required');
+            document.getElementById('id_mobile_number').removeAttribute('required');
+            document.getElementById('id_city').removeAttribute('required');
+            document.getElementById('id_identification_no').removeAttribute('required');
+            document.getElementById('id_last_name').removeAttribute('required');
+            document.getElementById('id_first_name').removeAttribute('required');
+            document.getElementById('id_title').removeAttribute('required');
+        } else{
+            document.getElementById('individual').style.display='block';
+            document.getElementById('company').style.display='none';
+            document.getElementById('fields_for_company_name').removeAttribute('required');
+            document.getElementById('fields_for_identification_no').removeAttribute('required');
+            document.getElementById('fields_for_city').removeAttribute('required');
+            document.getElementById('fields_for_mobile_number').removeAttribute('required');
+            document.getElementById('fields_for_state').removeAttribute('required');
+            document.getElementById('fields_for_local_government').removeAttribute('required');
+        }
+    });
+</script>
+{% endblock %}
