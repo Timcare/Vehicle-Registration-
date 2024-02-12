@@ -9,7 +9,7 @@ class VehicleInfoAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Vehicle Information", {
             "fields": [
-                'model','engine_number','policy_number','vehicle_type','chassis_no','engine_capacity','tank_capacity','odometer'
+                'model','engine_number','policy_number','vehicle_type','chassis_no','engine_capacity','tank_capacity','odometer','approved','vehicle'
             ],
         }),
     ]

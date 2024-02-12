@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import os
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'VehicleReg.urls'
 CRISPY_ALLOWED_TEMPLATES_PACK="bootstrap5"
 CRISPY_TEMPLATE_PACK="bootstrap5"
 
-LOGIN_REDIRECT_URL='home'
+LOGIN_REDIRECT_URL='home:home'
 LOGIN_URL='/login/'
 LOGOUT_URL='/logout/'
 

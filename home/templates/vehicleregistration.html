@@ -4,14 +4,11 @@
 {% block 'title' %} Dashboard {% endblock %}
 
 {% block 'body' %}
-{% comment %} <div {% if messages.tag %} class="alert-{{messages.tag}}" {% endif %}>
-    {% if messages %}
-    {% for message in messages %}
-    {{message}}
-    {% endfor %}
-    {% endif %}
-
-</div> {% endcomment %}
+{% if messages %}
+{% for message in messages %}
+<p {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}> {{message}} </p>
+{% endfor %}
+{% endif %}
 <div class="text-center fw-bold">
     <p> Please fill the following form:</p>
 </div>

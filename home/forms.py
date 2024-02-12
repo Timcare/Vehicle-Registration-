@@ -4,12 +4,12 @@ from . models import Vehicle,VehicleInfo,OwnerInfo,Individual,Company
 class VehicleForm(forms.ModelForm):
     class Meta:
         model=Vehicle
-        fields=("__all__")
+        fields=("vehicle_category","vehicle_sub_category","old_plate_number","vehicle_maker","color","fuel_type","year_of_manufacturer","plate_number")
 
 class VehicleInfoForm(forms.ModelForm):
     class Meta:
         model=VehicleInfo
-        fields=("__all__")
+        fields=("model","engine_number","policy_number","vehicle_type","chassis_no","engine_capacity","tank_capacity","odometer","vehicle")
 
 class OwnerInfoForm(forms.ModelForm):
     class Meta:

@@ -27,13 +27,13 @@
                         <a class="nav-link active" aria-current="page" href="{% url 'home:home' %}">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home:dashboard' %}">Vehicle Registration</a>
-                      </li>
-                      <li class="nav-item">
                         <a class="nav-link" href="{% url 'profile' %}">Profile</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="{% url 'license' %}">Driver's License</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home:dashboard' %}">Vehicle Registration</a>
                       </li>
                       {% if request.user.is_authenticated %}
                       <li class="nav-item">
@@ -53,7 +53,7 @@
         {% endblock %}
       </main>
     
-    <footer>
+    <footer class="footer">
         {% block 'footer' %}
         <div class="text-center p-5 mt-5" style="background-color:rgb(211, 242, 34); height:auto" >
             <p>Copyright© {% now 'Y' %}</p>
