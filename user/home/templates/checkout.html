@@ -1,9 +1,64 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block 'title' %} Preview {% endblock %}
+{% block 'title' %} Checkout {% endblock %}
 
 {% block 'body' %}
-{{vehicleform}}
+
+<div class="p-5">
+<h1>Vehicle Details</h1>
+<img class="rounded rounded-5 align-items-center" src='{{vehicles.user.profiles.photo.url }}' width="200px" height="100px"></img>
+<p class="fw-bold">
+Plate no. {{ vehicles.plate_number }}<br>
+</p>
+<table class="table">
+        
+    <tbody>
+        <tr>
+            <th scope="row">Full Name</th>
+            <td>{{vehicles.user.first_name}} {{vehicles.user.last_name}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Year of Manufacture</th>
+            <td>{{vehicles.year_of_manufacturer}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Vehicle Category</th>
+            <td>{{vehicles.vehicle_category}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Vehicle Maker</th>
+            <td>{{vehicles.vehicle_maker}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Vehicle Color</th>
+            <td>{{vehicles.color}}</td>
+        </tr>
+        
+        <tr>
+            <th scope="row">Vehicle Model</th>
+            <td>{{vehicleinfo.model}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Vehicle Type</th>
+            <td>{{vehicleinfo.vehicle_type}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Chasis Number</th>
+            <td>{{vehicleinfo.chassis_no}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Engine Capacity</th>
+            <td>{{vehicleinfo.engine_capacity}}</td>
+        </tr>
+        <tr>
+            <th scope="row">Tank Capacity</th>
+            <td>{{vehicleinfo.tank_capacity}}</td>
+        </tr>
+    </tbody>
+    
+</table>
+</div>
+<button class=" ms-5 btn bg-primary text-white">Download File</button>
 
 {% endblock %}

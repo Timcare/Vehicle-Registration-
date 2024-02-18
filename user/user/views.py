@@ -4,6 +4,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
 from . forms import ProfileForm,BioForm,UserForm
 from .models import Bio,Profiles
 
@@ -20,32 +21,38 @@ class RegisterForm(View):
         if register_form.is_valid():
             user=register_form.save()
             login(request,user)
-            return redirect("home")
+            return redirect("home:home")
         else:
             messages.error(request,'An error occur processing your request')
             return render(request,'registration/register.html',{'register_form':register_form})
 
+@login_required
 def Profile(request):
+    
     if request.method=="POST":
         userform=UserForm(request.POST,instance=request.user)
+        profileform=ProfileForm(request.POST,request.FILES,instance=request.user.profiles)
         bioform=BioForm(request.POST,request.FILES)
-        profileform=ProfileForm(request.POST,request.FILES,instance=request.user)
-        if bioform.is_valid() and profileform.is_valid() and userform.is_valid():
+        
+        if userform.is_valid() and profileform.is_valid() and bioform.is_valid():
             userform.save()
-            bioform.save()
-            profileform.save()
+            profilef=profileform.save()
+            profile=bioform.save(commit=False)
+            profile.profiles=profilef
+            profile.save()
+
             messages.success(request,'Profile updated successfully')
             return redirect("profile")
         else:
-            messages.error(request,'Error occour updating your profile')
+            messages.error(request,'Error occur updating your profile')
             return redirect("profile")
     else:
-        bioform=BioForm(instance=request.user)
-        profileform=ProfileForm()
         userform=UserForm(instance=request.user)
-    return render(request,'profile.html',{'profileform':profileform,'bioform':bioform,'userform':userform})
+        profileform=ProfileForm(instance=request.user.profiles)
+        bioform=BioForm()
+    return render(request,'profile.html',{'userform':userform,'profileform':profileform,'bioform':bioform})
 
+@login_required
 def License(request):
-    
     profiles=Bio.objects.filter(profiles=request.user.profiles)
     return render(request,'drivers_license.html',{'profiles':profiles})

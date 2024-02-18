@@ -1,18 +1,21 @@
 from django.db import models
 from .constants import VEHICLE_CATEGORY,FUEL_TYPE,VEHICLE_TYPE,ENGINE_TYPE,OWNER_TYPE,TITLE
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Vehicle(models.Model):
     vehicle_category=models.CharField(max_length=12,choices=VEHICLE_CATEGORY)
-    vehicle_sub_category=models.CharField(max_length=120)
-    old_plate_number=models.IntegerField()
+    vehicle_sub_category=models.CharField(max_length=120,null=True,blank=True)
+    old_plate_number=models.IntegerField(null=True,blank=True)
     vehicle_maker=models.CharField(max_length=120)
     color=models.CharField(max_length=120)
     fuel_type=models.CharField(max_length=10,choices=FUEL_TYPE)
     year_of_manufacturer=models.IntegerField()
+    plate_number=models.CharField(max_length=10)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.vehicle_category}'
+        return f'{self.plate_number} for {self.user.username}'
 
 class VehicleInfo(models.Model):
     model=models.CharField(max_length=120)
@@ -23,9 +26,26 @@ class VehicleInfo(models.Model):
     engine_capacity=models.CharField(max_length=50,choices=ENGINE_TYPE)
     tank_capacity=models.IntegerField()
     odometer=models.IntegerField(blank=True,null=True)
+    vehicle=models.OneToOneField(Vehicle, on_delete=models.CASCADE)
+    approved=models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.model}'
+
+class VehicleProof(models.Model):
+    Upload_receipt_of_purchase=models.ImageField(upload_to='receipt of purchase')
+    Upload_proof_of_ownership=models.ImageField(upload_to='proof of ownership')
+    Upload_any_means_of_identification=models.ImageField(upload_to='nmeans of identification')
+    Upload_any_means_of_identification=models.ImageField(upload_to='nmeans of identification')
+    Upload_custom_paper=models.ImageField(upload_to='custom paper')
+    Upload_inurance_paper=models.ImageField(upload_to='insurance paper')
+    Upload_vehicle_image=models.ImageField(upload_to='vehicle image')
+    vehicle_identification_number=models.ImageField(upload_to='identification number')
+
+    def __str__(self):
+        return f'{self.vehicle_identification_number}'
+
+    
 
 class OwnerInfo(models.Model):
     owner_identification=models.CharField(max_length=50,choices=OWNER_TYPE)

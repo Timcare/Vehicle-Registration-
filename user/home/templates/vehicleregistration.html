@@ -4,21 +4,18 @@
 {% block 'title' %} Dashboard {% endblock %}
 
 {% block 'body' %}
-{% comment %} <div {% if messages.tag %} class="alert-{{messages.tag}}" {% endif %}>
-    {% if messages %}
-    {% for message in messages %}
-    {{message}}
-    {% endfor %}
-    {% endif %}
-
-</div> {% endcomment %}
+{% if messages %}
+{% for message in messages %}
+<p {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}> {{message}} </p>
+{% endfor %}
+{% endif %}
 <div class="text-center fw-bold">
     <p> Please fill the following form:</p>
 </div>
 
 <div class="w-100 p-4">
     <p class="fw-bold lead">VEHICLE INFORMATION</p>
-    <form method="POST">
+    <form method="POST" enctype='multipart/form-data'>
         {% csrf_token %}
         <div class="row">
             <div class="col">
@@ -27,7 +24,8 @@
             <div class="col" >
                 {{vehicleinfo|crispy}}
             </div>
-            <p class="fw-bold lead">OWNER INFORMATION</p>
+           
+            {% comment %} <p class="fw-bold lead">OWNER INFORMATION</p>
             <div class="row">
                 <div class="col">
                     {{ownerinfo|crispy}}
@@ -38,10 +36,15 @@
                     {{companyform|crispy}}
                     </div>
                 </div>
-            </div>
+            </div> {% endcomment %}
+        </div>
+        <div class="row">
+                <div class="col" >
+                    {{vehicleproof|crispy}}
+                </div>
         </div>
 
-        <button class="btn btn-large p-3 mx-auto" type="submit" style="background-color:rgb(211, 242, 34)">Preview</button>
+        <button class="btn btn-large p-3 mx-auto" type="submit" style="background-color:rgb(211, 242, 34)">Submit</button>
     </form>
 </div>
 <script>
@@ -60,6 +63,7 @@
             document.getElementById('id_city').removeAttribute('required');
             document.getElementById('id_identification_no').removeAttribute('required');
             document.getElementById('id_last_name').removeAttribute('required');
+            document.getElementById('id_middle_name').removeAttribute('required');
             document.getElementById('id_first_name').removeAttribute('required');
             document.getElementById('id_title').removeAttribute('required');
         } else{
@@ -73,5 +77,5 @@
             document.getElementById('fields_for_local_government').removeAttribute('required');
         }
     });
-</script>
+</script> 
 {% endblock %}

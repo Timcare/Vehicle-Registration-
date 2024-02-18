@@ -4,16 +4,13 @@
 {% block 'title' %} Profile {% endblock %}
 
 {% block 'body' %}
-{% comment %} <div {% if messages.tag %} class="alert-{{messages.tag}}" {% endif %}>
-    {% if messages %}
-    {% for message in messages %}
-    {{message}}
-    {% endfor %}
-    {% endif %}
-
-</div> {% endcomment %}
+{% if messages %}
+{% for message in messages %}
+<p {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %}> {{message}} </p>
+{% endfor %}
+{% endif %}
 <div class="text-center fw-bold">
-    <p> Please fill the following form:</p>
+    <p> Please fill the following form:</p> 
 </div>
 
 <div class="w-100 p-4">
@@ -23,11 +20,12 @@
         <div class="row">
             <div class="col">
                 {{userform|crispy}}
-                {{profileform|crispy}}
                 {{bioform|crispy}}
+                {{profileform|crispy}}
+                
             </div>
         </div>
-        <button class="btn btn-large p-3 mx-auto" type="submit" style="background-color:rgb(211, 242, 34)">Preview</button>
+        <button class="btn btn-large p-3 mx-auto" type="submit" style="background-color:rgb(211, 242, 34)">Submit</button>
     </form>
 </div>
 {% endblock %}
