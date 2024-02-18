@@ -34,3 +34,6 @@ Contributions are welcome! Please follow these guidelines:
 ## Acknowledgments
 
 This project utilizes Django and Bootstrap 5.
+
+## License
+This project is licensed under the GNU General Public License.
